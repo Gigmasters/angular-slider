@@ -198,6 +198,8 @@ sliderDirective = ($timeout) ->
                     newValue = Math.max newValue,
                       parseInt(scope.local[low]) + parseInt(scope.buffer)
             newValue = roundStep(newValue, parseInt(scope.precision), parseFloat(scope.step), parseFloat(scope.floor))
+            otherRef = if currentRef is low then high else low
+            if newValue is scope.local[otherRef] then return
             changed = scope.dragstop and changed or scope.local[currentRef] != newValue
             scope.local[currentRef] = newValue
             scope.$apply()
